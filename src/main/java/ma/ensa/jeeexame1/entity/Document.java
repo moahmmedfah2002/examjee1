@@ -6,16 +6,16 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     private String title;
     private Date dateCreation;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "Borrow", joinColumns = @JoinColumn(name = "id_doc") ,inverseJoinColumns = @JoinColumn(name = "id_user"))
-    private List<User> users;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Borrow")
+    private List<User> user;
 
     public long getId() {
         return id;
@@ -42,10 +42,10 @@ public class Document {
     }
 
     public List<User> getUsers() {
-        return users;
+        return user;
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+        this.user = users;
     }
 }

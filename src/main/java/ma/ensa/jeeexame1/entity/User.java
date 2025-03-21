@@ -11,9 +11,9 @@ public class User {
     private long id;
     private String name;
     private String mail;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "Borrow", joinColumns = @JoinColumn(name = "id_User") ,inverseJoinColumns = @JoinColumn(name = "id_doc"))
-    private List<Document> documents;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Borrow")
+    private List<Document> document;
 
     public long getId() {
         return id;
@@ -40,10 +40,10 @@ public class User {
     }
 
     public List<Document> getDocuments() {
-        return documents;
+        return document;
     }
 
     public void setDocuments(List<Document> documents) {
-        this.documents = documents;
+        this.document = documents;
     }
 }

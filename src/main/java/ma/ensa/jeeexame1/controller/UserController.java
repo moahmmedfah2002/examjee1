@@ -17,13 +17,16 @@ public class UserController extends HttpServlet {
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("text/json");
         PrintWriter out = response.getWriter();
         UserImpl userImpl = new UserImpl();
         List<User> users=userImpl.findAll();
         Gson gson = new Gson();
         String users_ser="";
-        gson.toJson(users,User.class,out);
+        users_ser=gson.toJson(users);
+        System.out.println(users_ser);
+        out.println(users_ser);
+
 
 
 

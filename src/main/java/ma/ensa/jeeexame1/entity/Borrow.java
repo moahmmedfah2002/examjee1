@@ -1,9 +1,6 @@
 package ma.ensa.jeeexame1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -12,6 +9,12 @@ public class Borrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Document document;
     private Date date_prelvation;
     private Date retur_date;
 
